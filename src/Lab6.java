@@ -107,6 +107,7 @@ public class Lab6 extends GLJPanel implements GLEventListener {
         gl2.glPopMatrix();
 
         // TODO draw some shapes!
+
         Pyramid(gl2, 14);
 
     } // end display()
@@ -124,8 +125,8 @@ public class Lab6 extends GLJPanel implements GLEventListener {
             gl2.glBegin(GL2.GL_POLYGON);
 
             gl2.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT_AND_DIFFUSE, materials[i], i); // nadanie koloru punktom
-            gl2.glVertex3f(X[i], 0, Y[i]); // stworzenie punktu
-            gl2.glVertex3f(X[(i + 1)%n], 0, Y[(i + 1)%n]);
+            gl2.glVertex3f(X[i], -2, Y[i]); // stworzenie punktu
+            gl2.glVertex3f(X[(i + 1)%n], -2, Y[(i + 1)%n]);
             gl2.glVertex3f(0, 5, 0);
             gl2.glEnd();
         }
