@@ -107,35 +107,28 @@ public class Lab6 extends GLJPanel implements GLEventListener {
         gl2.glPopMatrix();
 
         // TODO draw some shapes!
-        Pyramid(gl2,14);
+        Pyramid(gl2, 14);
+
     } // end display()
 
-    public void Pyramid(GL2 gl2, int numberVertices) {
-        double angelIncrement = 2 * Math.PI / numberVertices;
-        double angel = 0;
-        double radius = 10;
-        float x = 0;
-        float z = 0;
-        gl2.glBegin(GL2.GL_POLYGON);
+    public void Pyramid(GL2 gl2, int n) {
+        int[] X = new int[n]; //Współrzędne wierzchołków na osi X
+        int[] Y = new int[n]; //Współrzędne wierzchołków na osi Y
 
-        for (int i = 1; i < numberVertices; i++) {
-            x = (float) (radius * Math.cos(angel));
-            z = (float) (radius * Math.cos(angel));
+        for (int i = 0; i < n; i++) {
+            X[i] = (int) (Math.cos(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 5);
+            Y[i] = (int) (Math.sin(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 5);
+        }//Stworzenie Wielokąta
 
-            gl2.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT_AND_DIFFUSE, materials[i],i-1);
-            gl2.glVertex3f(x,-2.0f,z);
+        for (int i = 0; i < X.length - 1; i++) {
+            gl2.glBegin(GL2.GL_POLYGON);
 
-            gl2.glMaterialfv(GL2.GL_FRONT,GL2.GL_AMBIENT_AND_DIFFUSE,materials[i],i);
-            gl2.glVertex3f(0.0f,7.0f,0.0f);
-
-            angel = i * angelIncrement;
-
-            gl2.glMaterialfv(GL2.GL_FRONT,GL2.GL_AMBIENT_AND_DIFFUSE,materials[i],i-2);
-            gl2.glVertex3f((float)(radius*Math.cos(angel)),-2.0f,(float)(radius*Math.sin(angel)));
-
+            gl2.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT_AND_DIFFUSE, materials[i], i); // nadanie koloru punktom
+            gl2.glVertex3f(X[i], 0, Y[i]); // stworzenie punktu
+            gl2.glVertex3f(X[(i + 1)%n], 0, Y[(i + 1)%n]);
+            gl2.glVertex3f(0, 5, 0);
+            gl2.glEnd();
         }
-        gl2.glEnd();
-
     }
 
     /**
@@ -154,8 +147,7 @@ public class Lab6 extends GLJPanel implements GLEventListener {
         gl2.glEnable(GL2.GL_LIGHTING);
         gl2.glEnable(GL2.GL_LIGHT0);
         // TODO configure better lighting!
-        float[] ambientLevel = {0.8f, 0.8f, 0.8f, 1f, 0.7f, 0.4f};
-        gl2.glLightModeli(GL2.GL_LIGHT_MODEL_TWO_SIDE, 3);
+        float[] ambientLevel = {0.7f, 0.7f, 0.6f, 0.8f, 0.7f, 0.4f};
         gl2.glLightModelfv(GL2.GL_LIGHT_MODEL_AMBIENT, ambientLevel, 1);
     }
 
