@@ -1,7 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.*;
 import com.jogamp.opengl.glu.GLU;
@@ -113,15 +112,15 @@ public class Lab6 extends GLJPanel implements GLEventListener {
     } // end display()
 
     public void Pyramid(GL2 gl2, int n) {
-        int[] X = new int[n]; //Współrzędne wierzchołków na osi X
-        int[] Y = new int[n]; //Współrzędne wierzchołków na osi Y
+        float[] X = new float[n]; //Współrzędne wierzchołków na osi X
+        float[] Y = new float[n]; //Współrzędne wierzchołków na osi Y
 
         for (int i = 0; i < n; i++) {
-            X[i] = (int) (Math.cos(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 5);
-            Y[i] = (int) (Math.sin(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 5);
+            X[i] = (float) (Math.cos(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 5);
+            Y[i] = (float) (Math.sin(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 5);
         }//Stworzenie Wielokąta
 
-        for (int i = 0; i < X.length - 1; i++) {
+        for (int i = 0; i < X.length - 1 ; i++) {
             gl2.glBegin(GL2.GL_POLYGON);
 
             gl2.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT_AND_DIFFUSE, materials[i], i); // nadanie koloru punktom
@@ -130,6 +129,7 @@ public class Lab6 extends GLJPanel implements GLEventListener {
             gl2.glVertex3f(0, 5, 0);
             gl2.glEnd();
         }
+
     }
 
     /**
